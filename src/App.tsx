@@ -4,22 +4,23 @@ import { Game } from "./scenes/Game";
 import { GameOver } from "./scenes/GameOver";
 
 interface AppState {
-  gameOver: boolean
-  userChoice: string,
-  computerChoice: string,
+  gameOver: boolean;
+  userChoice: string;
+  computerChoice: string;
 }
 
 class App extends Component<{}, AppState> {
-  constructor() {
-    super({});
+  constructor(props = {}) {
+    super(props);
 
     this.state = {
       gameOver: false,
-      userChoice: '',
-      computerChoice: '',
+      userChoice: "",
+      computerChoice: ""
     };
 
     this.chooseOption = this.chooseOption.bind(this);
+    this.playAgain = this.playAgain.bind(this);
   }
 
   chooseOption(e: any) {
@@ -32,15 +33,29 @@ class App extends Component<{}, AppState> {
 
   randomGuess() {
     const guess = Math.floor(Math.random() * 3);
-    return ['Rock', 'Paper', 'Scissors'][guess];
+    return ["Rock", "Paper", "Scissors"][guess];
   }
 
   renderScene() {
     if (this.state.gameOver) {
-      return <GameOver />;
+      return (
+        <GameOver
+          userChoice={this.state.userChoice}
+          computerChoice={this.state.computerChoice}
+          playAgain={this.playAgain}
+        />
+      );
     } else {
       return <Game chooseOption={this.chooseOption} />;
     }
+  }
+
+  playAgain() {
+    this.setState({
+      gameOver: false,
+      userChoice: "",
+      computerChoice: ""
+    });
   }
 
   render() {
