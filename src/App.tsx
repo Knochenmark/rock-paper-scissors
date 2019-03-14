@@ -63,7 +63,7 @@ class App extends Component<{}, AppState> {
       <div>
         <a
           className="github-fork-ribbon"
-          href="http://url.to-your.repo"
+          href="https://github.com/jodylecompte/rock-paper-scissors"
           data-ribbon="Fork me on GitHub"
           title="Fork me on GitHub"
         >
